@@ -1,4 +1,7 @@
 <launch>
+    
+    <remap from = "cmd_vel" to = "tello/cmd_vel"/>
+
     <node name = "face_detection_node" pkg ="face_detection" type = "webcam.py" output = "screen" />
 
 </launch>   

@@ -1,0 +1,5 @@
+<launch>
+    
+    <node name = "ros2cv_node" pkg ="face_detection" type = "ros2cv.py" output = "screen" />
+
+</launch>   

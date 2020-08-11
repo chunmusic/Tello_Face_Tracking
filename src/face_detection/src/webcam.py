@@ -24,12 +24,12 @@ class LoadVideo(object):
         cap = cv2.VideoCapture(0)
         face_cascade = cv2.CascadeClassifier('/home/pongsakorn/drone_face_tracking/src/face_detection/src/haarcascade_frontalface_default.xml')
 
+        print("type of cap")
+        print(type(cap))
+        
         ScaleFactor = 1.2
         
         minNeighbors = 3
-
-        cmd_vel.linear.x = 0.2
-        cmd_vel.angular.z = 0.2
 
 
         width  = cap.get(3) # float
@@ -51,24 +51,25 @@ class LoadVideo(object):
 
                 center_x = (x+(w/2))
                 center_y = (y+(h/2))
-                
-                # rospy.loginfo("center x: " + str((x+w)/2))
-                # rospy.loginfo("center y: " + str((y+h)/2))
-
-                # right_side
+               
+                # left_side
                 if center_x > 0 and center_x <= width/3:
                     print("left_side")
+                    cmd_vel.angular.z = 0.1
 
+                # middle_side
                 elif center_x > width/3 and center_x <= 2*(width/3):
                     print("middle_side")
+                    cmd_vel.angular.z = 0.0
 
+                # right_side
                 elif center_x > 2*(width/3) and center_x <= width:
                     print("right_side")
+                    cmd_vel.angular.z = -0.1
 
                 rospy.loginfo("center x: " + str(x+(w/2)))
                 rospy.loginfo("center y: " + str(y+(h/2)))
 
-                
                 pub.publish(cmd_vel)
 
 
