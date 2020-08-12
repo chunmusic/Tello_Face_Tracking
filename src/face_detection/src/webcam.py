@@ -6,6 +6,7 @@ from cv_bridge import CvBridge, CvBridgeError
 from geometry_msgs.msg import Twist
 import cv2
 import numpy as np
+import tellopy
 
 
 class LoadVideo(object):
@@ -21,7 +22,9 @@ class LoadVideo(object):
 
     def video_detection (self,):
         # cap = cv2.VideoCapture("/home/user/opencv_for_robotics_images/Unit_3/Course_images/chris.mp4")
-        cap = cv2.VideoCapture(0)
+        # cap = cv2.VideoCapture(0)
+        cap = cv2.VideoCapture("udp://192.168.10.1:11111")
+
         face_cascade = cv2.CascadeClassifier('/home/pongsakorn/drone_face_tracking/src/face_detection/src/haarcascade_frontalface_default.xml')
 
         print("type of cap")
