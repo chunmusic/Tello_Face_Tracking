@@ -1,64 +1,101 @@
-#!/usr/bin/env python
+#!/usr/bin/env python2
 
 import rospy
-from sensor_msgs.msg import Image
-from cv_bridge import CvBridge, CvBridgeError
-from geometry_msgs.msg import Twist
+from sensor_msgs.msg import CompressedImage
+import av
 import cv2
 import numpy as np
-import tellopy
+import threading
+import traceback
+from geometry_msgs.msg import Twist
 
 
-class LoadVideo(object):
 
+class StandaloneVideoStream(object):
     def __init__(self):
-        self.ctrl_c = False 
-       
-        self.bridge_object = CvBridge()
+        self.cond = threading.Condition()
+        self.queue = []
+        self.closed = False
 
-    def shutdownhook(self):
-        # works better than the rospy.is_shutdown()
-        self.ctrl_c = True
+    def read(self, size):
+        self.cond.acquire()
+        try:
+            if len(self.queue) == 0 and not self.closed:
+                self.cond.wait(2.0)
+            data = bytes()
+            while 0 < len(self.queue) and len(data) + len(self.queue[0]) < size:
+                data = data + self.queue[0]
+                del self.queue[0]
+        finally:
+            self.cond.release()
+        return data
 
-    def video_detection (self,):
-        # cap = cv2.VideoCapture("/home/user/opencv_for_robotics_images/Unit_3/Course_images/chris.mp4")
-        # cap = cv2.VideoCapture(0)
-        cap = cv2.VideoCapture("udp://192.168.10.1:11111")
+    def seek(self, offset, whence):
+        return -1
 
-        face_cascade = cv2.CascadeClassifier('/home/pongsakorn/drone_face_tracking/src/face_detection/src/haarcascade_frontalface_default.xml')
+    def close(self):
+        self.cond.acquire()
+        self.queue = []
+        self.closed = True
+        self.cond.notifyAll()
+        self.cond.release()
 
-        print("type of cap")
-        print(type(cap))
-        
-        ScaleFactor = 1.2
-        
-        minNeighbors = 3
+    def add_frame(self, buf):
+        self.cond.acquire()
+        self.queue.append(buf)
+        self.cond.notifyAll()
+        self.cond.release()
 
 
-        width  = cap.get(3) # float
-        height = cap.get(4) # float
+stream = StandaloneVideoStream()
 
-        while not self.ctrl_c:
 
-            ret, frame = cap.read()         
-            img = frame
+def callback(msg):
+    #rospy.loginfo('frame: %d bytes' % len(msg.data))
+    stream.add_frame(msg.data)
 
-            gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)        
 
-            faces = face_cascade.detectMultiScale(gray, ScaleFactor, minNeighbors)
-            
+
+def main():
+    rospy.init_node('h264_listener')
+    rospy.Subscriber("/tello/image_raw/h264", CompressedImage, callback)
+    container = av.open(stream)
+    rospy.loginfo('main: opened')
+
+    width = 320
+    height = 240
+
+    face_cascade = cv2.CascadeClassifier('/home/pongsakorn/tello_face_tracking/src/face_detection/src/haarcascade_frontalface_default.xml')
+
+    ScaleFactor = 1.2
+    minNeighbors = 3
+
+    for frame in container.decode(video=0):
+        image = cv2.cvtColor(np.array(frame.to_image()), cv2.COLOR_RGB2BGR)
+
+        res = cv2.resize(image, (320,240))
+        gray = cv2.cvtColor(res, cv2.COLOR_BGR2GRAY)        
+        faces = face_cascade.detectMultiScale(gray, ScaleFactor, minNeighbors)
+
+
+        if len(faces) == 0:
+            print ("No face detected")
+            cmd_vel.angular.z = 0.0
+
+
+        else:
             for (x,y,w,h) in faces:
                 
-                cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),2)  
-                roi = img[y:y+h, x:x+w]
+                cv2.rectangle(res,(x,y),(x+w,y+h),(255,0,0),2)  
+                roi = res[y:y+h, x:x+w]
 
                 center_x = (x+(w/2))
                 center_y = (y+(h/2))
-               
+                
                 # left_side
                 if center_x > 0 and center_x <= width/3:
                     print("left_side")
-                    cmd_vel.angular.z = 0.1
+                    cmd_vel.angular.z = -1
 
                 # middle_side
                 elif center_x > width/3 and center_x <= 2*(width/3):
@@ -68,32 +105,28 @@ class LoadVideo(object):
                 # right_side
                 elif center_x > 2*(width/3) and center_x <= width:
                     print("right_side")
-                    cmd_vel.angular.z = -0.1
-
+                    cmd_vel.angular.z = 1
+                                
                 rospy.loginfo("center x: " + str(x+(w/2)))
                 rospy.loginfo("center y: " + str(y+(h/2)))
 
-                pub.publish(cmd_vel)
+        pub.publish(cmd_vel)
+
+        cv2.imshow('Frame', res)
+        cv2.waitKey(1)
 
 
-            cv2.imshow('Face',img)
-               
-            cv2.waitKey(1)
-        cap.release()
- 
 
 if __name__ == '__main__':
-    
-    rospy.init_node('load_video_node')
-    pub = rospy.Publisher('/cmd_vel',Twist,queue_size=20)
-    load_video_object = LoadVideo()
 
+    pub = rospy.Publisher('/tello/cmd_vel',Twist,queue_size=1)
     cmd_vel = Twist()   
 
     try:
-        load_video_object.video_detection()
-        rospy.oncespin()
-    except rospy.ROSInterruptException:
-        pass
-    
-    cv2.destroyAllWindows()
+        main()
+
+    except BaseException:
+        traceback.print_exc()
+    finally:
+        stream.close()
+        cv2.destroyAllWindows()

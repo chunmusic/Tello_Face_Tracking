@@ -1,2 +1,2 @@
 - setup-file:
-    local-name: /home/pongsakorn/drone_face_tracking/devel/setup.sh
+    local-name: /home/pongsakorn/tello_face_tracking/devel/setup.sh

@@ -1,2 +1,2 @@
 face_detection
--DCATKIN_DEVEL_PREFIX=/home/pongsakorn/drone_face_tracking/devel -DCMAKE_INSTALL_PREFIX=/home/pongsakorn/drone_face_tracking/install -G Unix Makefiles
+-DCATKIN_DEVEL_PREFIX=/home/pongsakorn/tello_face_tracking/devel -DCMAKE_INSTALL_PREFIX=/home/pongsakorn/tello_face_tracking/install -G Unix Makefiles

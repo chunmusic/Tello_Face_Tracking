@@ -1,4 +1,4 @@
-prefix=/home/pongsakorn/drone_face_tracking/devel
+prefix=/home/pongsakorn/tello_face_tracking/devel
 
 Name: face_detection
 Description: Description of face_detection

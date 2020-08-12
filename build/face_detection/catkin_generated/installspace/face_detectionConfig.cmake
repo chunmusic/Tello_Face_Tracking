@@ -67,14 +67,14 @@ set(face_detection_CONFIG_INCLUDED TRUE)
 
 # set variables for source/devel/install prefixes
 if("FALSE" STREQUAL "TRUE")
-  set(face_detection_SOURCE_PREFIX /home/pongsakorn/drone_face_tracking/src/face_detection)
-  set(face_detection_DEVEL_PREFIX /home/pongsakorn/drone_face_tracking/devel)
+  set(face_detection_SOURCE_PREFIX /home/pongsakorn/tello_face_tracking/src/face_detection)
+  set(face_detection_DEVEL_PREFIX /home/pongsakorn/tello_face_tracking/devel)
   set(face_detection_INSTALL_PREFIX "")
   set(face_detection_PREFIX ${face_detection_DEVEL_PREFIX})
 else()
   set(face_detection_SOURCE_PREFIX "")
   set(face_detection_DEVEL_PREFIX "")
-  set(face_detection_INSTALL_PREFIX /home/pongsakorn/drone_face_tracking/install)
+  set(face_detection_INSTALL_PREFIX /home/pongsakorn/tello_face_tracking/install)
   set(face_detection_PREFIX ${face_detection_INSTALL_PREFIX})
 endif()
 
@@ -154,7 +154,7 @@ foreach(library ${libraries})
     set(lib_path "")
     set(lib "${library}-NOTFOUND")
     # since the path where the library is found is returned we have to iterate over the paths manually
-    foreach(path /home/pongsakorn/drone_face_tracking/install/lib;/home/pongsakorn/catkin_ws/devel/lib;/opt/ros/kinetic/lib)
+    foreach(path /home/pongsakorn/tello_face_tracking/install/lib;/home/pongsakorn/tello_driver/devel/lib;/home/pongsakorn/my_mavros/devel/lib;/home/pongsakorn/shi_cable_ws/devel/lib;/home/pongsakorn/diff_drive_ws/devel/lib;/home/pongsakorn/ws_moveit/devel/lib;/opt/ros/melodic/lib)
       find_library(lib ${library}
         PATHS ${path}
         NO_DEFAULT_PATH NO_CMAKE_FIND_ROOT_PATH)

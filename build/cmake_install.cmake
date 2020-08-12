@@ -1,8 +1,8 @@
-# Install script for directory: /home/pongsakorn/drone_face_tracking/src
+# Install script for directory: /home/pongsakorn/tello_face_tracking/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/pongsakorn/drone_face_tracking/install")
+  set(CMAKE_INSTALL_PREFIX "/home/pongsakorn/tello_face_tracking/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -32,7 +32,12 @@ if(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
   set(CMAKE_INSTALL_SO_NO_EXE "1")
 endif()
 
-if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
+# Is this installation the result of a crosscompile?
+if(NOT DEFINED CMAKE_CROSSCOMPILING)
+  set(CMAKE_CROSSCOMPILING "FALSE")
+endif()
+
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   
       if (NOT EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}")
         file(MAKE_DIRECTORY "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}")
@@ -42,91 +47,91 @@ if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspeci
       endif()
 endif()
 
-if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/pongsakorn/drone_face_tracking/install/_setup_util.py")
+   "/home/pongsakorn/tello_face_tracking/install/_setup_util.py")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-file(INSTALL DESTINATION "/home/pongsakorn/drone_face_tracking/install" TYPE PROGRAM FILES "/home/pongsakorn/drone_face_tracking/build/catkin_generated/installspace/_setup_util.py")
+file(INSTALL DESTINATION "/home/pongsakorn/tello_face_tracking/install" TYPE PROGRAM FILES "/home/pongsakorn/tello_face_tracking/build/catkin_generated/installspace/_setup_util.py")
 endif()
 
-if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/pongsakorn/drone_face_tracking/install/env.sh")
+   "/home/pongsakorn/tello_face_tracking/install/env.sh")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-file(INSTALL DESTINATION "/home/pongsakorn/drone_face_tracking/install" TYPE PROGRAM FILES "/home/pongsakorn/drone_face_tracking/build/catkin_generated/installspace/env.sh")
+file(INSTALL DESTINATION "/home/pongsakorn/tello_face_tracking/install" TYPE PROGRAM FILES "/home/pongsakorn/tello_face_tracking/build/catkin_generated/installspace/env.sh")
 endif()
 
-if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/pongsakorn/drone_face_tracking/install/setup.bash;/home/pongsakorn/drone_face_tracking/install/local_setup.bash")
+   "/home/pongsakorn/tello_face_tracking/install/setup.bash;/home/pongsakorn/tello_face_tracking/install/local_setup.bash")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-file(INSTALL DESTINATION "/home/pongsakorn/drone_face_tracking/install" TYPE FILE FILES
-    "/home/pongsakorn/drone_face_tracking/build/catkin_generated/installspace/setup.bash"
-    "/home/pongsakorn/drone_face_tracking/build/catkin_generated/installspace/local_setup.bash"
+file(INSTALL DESTINATION "/home/pongsakorn/tello_face_tracking/install" TYPE FILE FILES
+    "/home/pongsakorn/tello_face_tracking/build/catkin_generated/installspace/setup.bash"
+    "/home/pongsakorn/tello_face_tracking/build/catkin_generated/installspace/local_setup.bash"
     )
 endif()
 
-if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/pongsakorn/drone_face_tracking/install/setup.sh;/home/pongsakorn/drone_face_tracking/install/local_setup.sh")
+   "/home/pongsakorn/tello_face_tracking/install/setup.sh;/home/pongsakorn/tello_face_tracking/install/local_setup.sh")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-file(INSTALL DESTINATION "/home/pongsakorn/drone_face_tracking/install" TYPE FILE FILES
-    "/home/pongsakorn/drone_face_tracking/build/catkin_generated/installspace/setup.sh"
-    "/home/pongsakorn/drone_face_tracking/build/catkin_generated/installspace/local_setup.sh"
+file(INSTALL DESTINATION "/home/pongsakorn/tello_face_tracking/install" TYPE FILE FILES
+    "/home/pongsakorn/tello_face_tracking/build/catkin_generated/installspace/setup.sh"
+    "/home/pongsakorn/tello_face_tracking/build/catkin_generated/installspace/local_setup.sh"
     )
 endif()
 
-if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/pongsakorn/drone_face_tracking/install/setup.zsh;/home/pongsakorn/drone_face_tracking/install/local_setup.zsh")
+   "/home/pongsakorn/tello_face_tracking/install/setup.zsh;/home/pongsakorn/tello_face_tracking/install/local_setup.zsh")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-file(INSTALL DESTINATION "/home/pongsakorn/drone_face_tracking/install" TYPE FILE FILES
-    "/home/pongsakorn/drone_face_tracking/build/catkin_generated/installspace/setup.zsh"
-    "/home/pongsakorn/drone_face_tracking/build/catkin_generated/installspace/local_setup.zsh"
+file(INSTALL DESTINATION "/home/pongsakorn/tello_face_tracking/install" TYPE FILE FILES
+    "/home/pongsakorn/tello_face_tracking/build/catkin_generated/installspace/setup.zsh"
+    "/home/pongsakorn/tello_face_tracking/build/catkin_generated/installspace/local_setup.zsh"
     )
 endif()
 
-if(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unspecified")
+if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   list(APPEND CMAKE_ABSOLUTE_DESTINATION_FILES
-   "/home/pongsakorn/drone_face_tracking/install/.rosinstall")
+   "/home/pongsakorn/tello_face_tracking/install/.rosinstall")
   if(CMAKE_WARN_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(WARNING "ABSOLUTE path INSTALL DESTINATION : ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
   if(CMAKE_ERROR_ON_ABSOLUTE_INSTALL_DESTINATION)
     message(FATAL_ERROR "ABSOLUTE path INSTALL DESTINATION forbidden (by caller): ${CMAKE_ABSOLUTE_DESTINATION_FILES}")
   endif()
-file(INSTALL DESTINATION "/home/pongsakorn/drone_face_tracking/install" TYPE FILE FILES "/home/pongsakorn/drone_face_tracking/build/catkin_generated/installspace/.rosinstall")
+file(INSTALL DESTINATION "/home/pongsakorn/tello_face_tracking/install" TYPE FILE FILES "/home/pongsakorn/tello_face_tracking/build/catkin_generated/installspace/.rosinstall")
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/home/pongsakorn/drone_face_tracking/build/gtest/cmake_install.cmake")
-  include("/home/pongsakorn/drone_face_tracking/build/face_detection/cmake_install.cmake")
+  include("/home/pongsakorn/tello_face_tracking/build/gtest/cmake_install.cmake")
+  include("/home/pongsakorn/tello_face_tracking/build/face_detection/cmake_install.cmake")
 
 endif()
 
@@ -138,5 +143,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/pongsakorn/drone_face_tracking/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/pongsakorn/tello_face_tracking/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
