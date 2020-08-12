@@ -109,9 +109,27 @@ def main():
                 elif center_x > 2*(width/3) and center_x <= width:
                     print("right_side")
                     cmd_vel.angular.z = 1
+
+
+                # move_forward
+                if w > 0 and w <= width/3:
+                    print("move_forward")
+                    cmd_vel.linear.x = 0.2
+
+                # no move 
+                elif w > width/3 and w <= 2*(width/3):
+                    print("no move")
+                    cmd_vel.linear.x = 0.0
+
+                # move_backward
+                elif w > 2*(width/3) and w <= width:
+                    print("move_backward")
+                    cmd_vel.linear.x = -0.2
                                 
+                
                 rospy.loginfo("center x: " + str(x+(w/2)))
                 rospy.loginfo("center y: " + str(y+(h/2)))
+                rospy.loginfo("frame_w: " + str(w))
 
         pub_vel.publish(cmd_vel)
 
