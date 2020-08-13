@@ -81,10 +81,9 @@ def main():
 
         if len(faces) == 0:
             print ("No face detected")
+            cmd_vel.linear.x = 0.0
             cmd_vel.angular.z = 0.0
-            pub_land.publish()
-            break
-
+    
 
         else:
             for (x,y,w,h) in faces:
